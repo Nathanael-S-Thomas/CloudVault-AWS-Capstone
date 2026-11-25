@@ -1,0 +1,10 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CloudVault | Cloud File Manager</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"></head>
+<body><header><div class="brand"><span class="logo">CV</span><div><b>CloudVault</b><small>Cloud File Management</small></div></div><span class="status"><i></i>{{ storage_mode|upper }} STORAGE</span></header>
+<main><section class="hero"><div><p class="eyebrow">YOUR FILES · YOUR CLOUD</p><h1>Simple, secure<br><span>cloud storage.</span></h1><p class="sub">Upload, manage and access your files from one dashboard.</p></div><div class="heroicon">☁</div></section>
+{% with messages=get_flashed_messages(with_categories=true) %}{% if messages %}<div class="messages">{% for cat,msg in messages %}<div class="{{cat}}">{{msg}}</div>{% endfor %}</div>{% endif %}{% endwith %}
+<section class="upload"><form action="/upload" method="post" enctype="multipart/form-data"><label class="drop"><div class="upicon">↑</div><strong>Upload a file</strong><span>Choose a file up to 25 MB · {{allowed}}</span><input type="file" name="file" required onchange="this.form.submit()"></label></form></section>
+<section class="files"><div class="sectionhead"><div><h2>Your files</h2><p>Files currently available in storage</p></div><div class="count">{{files|length}} items</div></div>
+{% if files %}<div class="tablewrap"><table><thead><tr><th>NAME</th><th>SIZE</th><th>MODIFIED</th><th></th></tr></thead><tbody>{% for f in files %}<tr><td><div class="filename"><span class="fileicon">▤</span>{{f.name}}</div></td><td>{{ "%.1f"|format(f.size/1024) }} KB</td><td>{{f.modified}}</td><td class="actions"><a href="/download/{{f.key}}">Download</a><form action="/delete/{{f.key}}" method="post"><button>Delete</button></form></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty"><div>▤</div><h3>No files yet</h3><p>Upload your first file to get started.</p></div>{% endif %}</section>
+<footer><span>CloudVault · AWS Capstone Project</span><span>Flask · Amazon S3 · EC2</span></footer></main></body></html>
