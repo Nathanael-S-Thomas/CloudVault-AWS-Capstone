@@ -206,5 +206,8 @@ This capstone demonstrates:
 Student cloud project / capstone demonstration.
 
 ---
+## Project Team Members:
+- Nathanael S Thomas (202410101150009)
+- Aman Kumar Sharma (202410101150011)
 
 *Status is documented based on the deployment state verified during the project. Auto Scaling and the EBS demonstration are marked as planned/remaining until completed and tested.*
